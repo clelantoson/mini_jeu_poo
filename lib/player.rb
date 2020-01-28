@@ -35,14 +35,14 @@ class HumanPlayer < Player
   attr_accessor :weapon_level
 
   def initialize(name)
+    super(name)
     @life_points = 100
     @weapon_level = 1
-    super(name)
   end
 
   def show_state
-    puts "#{self.name} a #{self.life_points} points de vie, avec une arme de niveau #{@weapon_level}"  
     super
+    puts "#{self.name} a #{self.life_points} points de vie, avec une arme de niveau #{@weapon_level}"  
   end
 
   def compute_damage
@@ -61,48 +61,22 @@ class HumanPlayer < Player
     end
   end
 
-  # def search_health_pack
-  #   result = rand(1..6)
-  #   if result >= 2 && result <= 5
-  #     @life_points + 50 
-  #     @life_points.to_i.clamp(0, 100)
-  #     puts "Bravo, tu as trouvé un pack de +50 points de vie ! Tu as maintenant #{@life_points}".
-  #   elsif 
-  #     result == 6
-  #     @life_points + 80 
-  #     @life_points.to_i.clamp(0, 100)
-  #     puts "Bravo, tu as trouvé un pack de +80 points de vie ! Tu as maintenant #{@life_points}".
-  #   else 
-  #     puts "Tu n'as rien trouvé."
-  #   end
-  # end
-
   def search_health_pack
     result = rand(1..6)
-    if result == 1
-      puts "Tu n'as rien trouvé"
-    elsif result >= 2 && result <= 5
-      if @life_points + 50 > 100 && @life_points != 100
-        @life_points = 100
-        puts "Tu as trouvé +50pv ! Tu as now #{@life_points}pv"
-      elsif @life_points == 100
-        puts "Tu as trouvé +50pv, mais tu as déjà le max de points de vie !"
-      else
-        @life_points = @life_points + 50
-        puts "Tu as trouvé +50pv ! Tu as now #{@life_points}pv"
-      end
-    else @life_points == 6
-      if @life_points + 80 > 100 && @life_points != 100
-        @life_points = 100
-        puts "Tu as trouvé +80pv ! Tu as now #{@life_points}pv"
-      elsif @life_points == 100
-        puts "Tu as trouvé +80pv, mais tu as déjà le max de points de vie !"
-      else
-        @life_points = @life_points + 80
-        puts "Woaw, +80pv ! Tu as now #{@life_points}pv"      
-      end
+    if result >= 2 && result <= 5
+      @life_points += 50 
+     @life_points = @life_points.clamp(0, 100)
+      puts "Bravo, tu as trouvé un pack de +50 points de vie ! Tu as maintenant #{@life_points}."
+    elsif 
+      result == 6
+      @life_points += 80 
+      @life_points = @life_points.clamp(0, 100)
+      puts "Bravo, tu as trouvé un pack de +80 points de vie ! Tu as maintenant #{@life_points}."
+    else 
+      puts "Tu n'as rien trouvé."
     end
   end
+
 end
 
 
