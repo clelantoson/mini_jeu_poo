@@ -26,10 +26,10 @@ class Player
     end
   end
 
-  def attacks(name)
-    puts "le joueur #{self.name} attaque le joueur #{name}"
+  def attacks(player_to_attack)
+    puts "le joueur #{@name} attaque le joueur #{player_to_attack.name}"
     damages = compute_damage
-    name.gets_damage(damages)
+    player_to_attack.gets_damage(damages)
     puts "il lui inflige #{damages} points de dommages."
   end
 
