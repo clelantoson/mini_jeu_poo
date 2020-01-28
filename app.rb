@@ -16,7 +16,7 @@ while player1.life_points > 0 && player2.life_points > 0
 
   puts "Passons à la phase d'attaque :"
   player1.attacks(player2)
-  if player2.life_points <= 0
+  if player2.life_points < 0 
     break
   end
  player2.attacks(player1) 

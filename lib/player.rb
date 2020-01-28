@@ -1,10 +1,3 @@
-# n joueur possède 2 attributs que tu vas mettre en attr_accessor : un nom @name (string) et un niveau de vie @life_points (integer).
-
-# Quand on veut créer un objet Player, on ne met que son nom en entrée car le niveau de vie est le même pour tout le monde au début
-#  (10 pts de vie). 
-# cris la méthode initialize afin qu'on ait la réaction suivante si on lance app.rb et qu'on utilise PRY :
-
-
 class Player
   attr_accessor :name, :life_points
 
@@ -37,3 +30,79 @@ class Player
     return rand(1..6)
   end
 end
+
+class HumanPlayer < Player
+  attr_accessor :weapon_level
+
+  def initialize(name)
+    @life_points = 100
+    @weapon_level = 1
+    super(name)
+  end
+
+  def show_state
+    puts "#{self.name} a #{self.life_points} points de vie, avec une arme de niveau #{@weapon_level}"  
+    super
+  end
+
+  def compute_damage
+    rand(1..6) * @weapon_level
+    super
+  end
+
+  def search_weapon
+    new_weapon_level = rand(1..6)
+    puts "Tu as trouvé une arme de niveau #{new_weapon_level}."
+    if new_weapon_level > @weapon_level
+      @weapon_level = new_weapon_level
+      puts "Youhou ! elle est meilleure que ton arme actuelle : tu la prends. Ton arme est maintenant de niveau #{@weapon_level}."
+    else 
+      puts "Sh*t... elle n'est pas mieux que ton arme actuelle...relâche la."
+    end
+  end
+
+  # def search_health_pack
+  #   result = rand(1..6)
+  #   if result >= 2 && result <= 5
+  #     @life_points + 50 
+  #     @life_points.to_i.clamp(0, 100)
+  #     puts "Bravo, tu as trouvé un pack de +50 points de vie ! Tu as maintenant #{@life_points}".
+  #   elsif 
+  #     result == 6
+  #     @life_points + 80 
+  #     @life_points.to_i.clamp(0, 100)
+  #     puts "Bravo, tu as trouvé un pack de +80 points de vie ! Tu as maintenant #{@life_points}".
+  #   else 
+  #     puts "Tu n'as rien trouvé."
+  #   end
+  # end
+
+  def search_health_pack
+    result = rand(1..6)
+    if result == 1
+      puts "Tu n'as rien trouvé"
+    elsif result >= 2 && result <= 5
+      if @life_points + 50 > 100 && @life_points != 100
+        @life_points = 100
+        puts "Tu as trouvé +50pv ! Tu as now #{@life_points}pv"
+      elsif @life_points == 100
+        puts "Tu as trouvé +50pv, mais tu as déjà le max de points de vie !"
+      else
+        @life_points = @life_points + 50
+        puts "Tu as trouvé +50pv ! Tu as now #{@life_points}pv"
+      end
+    else @life_points == 6
+      if @life_points + 80 > 100 && @life_points != 100
+        @life_points = 100
+        puts "Tu as trouvé +80pv ! Tu as now #{@life_points}pv"
+      elsif @life_points == 100
+        puts "Tu as trouvé +80pv, mais tu as déjà le max de points de vie !"
+      else
+        @life_points = @life_points + 80
+        puts "Woaw, +80pv ! Tu as now #{@life_points}pv"      
+      end
+    end
+  end
+end
+
+
