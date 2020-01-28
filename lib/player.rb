@@ -55,7 +55,7 @@ class HumanPlayer < Player
     puts "Tu as trouvé une arme de niveau #{new_weapon_level}."
     if new_weapon_level > @weapon_level
       @weapon_level = new_weapon_level
-      puts "Youhou ! elle est meilleure que ton arme actuelle : tu la prends. Ton arme est maintenant de niveau #{@weapon_level}."
+      puts "Youpiyoup ! Elle est meilleure que ton arme actuelle : tu la prends. Ton arme est maintenant de niveau #{@weapon_level}."
     else 
       puts "Sh*t... elle n'est pas mieux que ton arme actuelle...relâche la."
     end
@@ -66,12 +66,12 @@ class HumanPlayer < Player
     if result >= 2 && result <= 5
       @life_points += 50 
      @life_points = @life_points.clamp(0, 100)
-      puts "Bravo, tu as trouvé un pack de +50 points de vie ! Tu as maintenant #{@life_points}."
+      puts "Bravo, tu as trouvé un pack de +50 points de vie ! Tu as maintenant #{@life_points} PV."
     elsif 
       result == 6
       @life_points += 80 
       @life_points = @life_points.clamp(0, 100)
-      puts "Bravo, tu as trouvé un pack de +80 points de vie ! Tu as maintenant #{@life_points}."
+      puts "Bravo, tu as trouvé un pack de +80 points de vie ! Tu as maintenant #{@life_points} PV."
     else 
       puts "Tu n'as rien trouvé."
     end

@@ -40,16 +40,16 @@ user = init_name
 ennemies = create_ennemies
 player1 = ennemies[0]
 player2 = ennemies[1]
-while user.life_points > 0 && player1.life_points > 0 || player2.life_points > 0
+while user.life_points > 0 && ( player1.life_points > 0 || player2.life_points > 0 )
   user.show_state
   puts "Quelle action veux-tu effectuer ?\n\n"
 
   puts "a - chercher une meilleure arme"
   puts "s - chercher à se soigner\n\n"
   
-  puts "attaquer un joueur en vue :"
-  puts "0 - #{player1.name} a #{player1.show_state} points de vie"
-  puts  "1 - #{player2.name} a #{player2.show_state} points de vie"
+  puts "attaquer un joueur en vie :"
+  puts "0 - #{player1.name} a #{player1.show_state} points de vie" if player1.life_points > 0
+  puts  "1 - #{player2.name} a #{player2.show_state} points de vie" if player2.life_points > 0
 
   user_answer = gets.chomp
 
@@ -71,7 +71,7 @@ while user.life_points > 0 && player1.life_points > 0 || player2.life_points > 0
     if ennemi.life_points > 0
       ennemi.attacks(user)
     else
-      puts "#{ennemi.name} est mort, il ne peut pas attaquer."
+      puts "#{ennemi.name} n'est pas un zombie, il ne peut pas attaquer."
     end
   end
 
